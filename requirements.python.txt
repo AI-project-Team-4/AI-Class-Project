@@ -1,2 +1,6 @@
 py7zr==0.18.0
 pandas==1.4.0
+spacy==3.2.3
+nltk==3.7
+sklearn==0.0
+tqdm==4.63.0
