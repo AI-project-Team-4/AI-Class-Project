@@ -30,8 +30,8 @@ def normalize(comment, lowercase, remove_stopwords):
     normalized = " ".join(lemmatized)
     return normalized
 
-def get_tfidf_df(train_set, testing_set):
-    tfidfvectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english')
+def get_tfidf_df(train_set, testing_set, min_df, max_df):
+    tfidfvectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english', min_df=min_df, max_df=max_df)
 
     train_set['item_description_new'] = train_set['item_description'].progress_apply(normalize, lowercase=True, remove_stopwords=True)
 
