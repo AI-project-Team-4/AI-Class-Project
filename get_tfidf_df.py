@@ -5,6 +5,7 @@ from nltk.corpus import stopwords
 import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer
 import ssl
+import re
 
 tqdm.pandas()
 
@@ -27,7 +28,10 @@ def normalize(comment, lowercase, remove_stopwords):
         if lemma:
             if not remove_stopwords or (remove_stopwords and lemma not in stops) and not word.is_punct:
                 lemmatized.append(lemma)
-    normalized = " ".join(lemmatized)
+
+    cut = [word for word in lemmatized if len(word) > 2 and not re.search("^[0-9]*$", word)] # Only keep words that are more than 2 characters long, remove words that are only number digits
+
+    normalized = " ".join(cut)
     return normalized
 
 def get_tfidf_df(train_set, testing_set, min_df, max_df):
