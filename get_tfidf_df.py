@@ -34,12 +34,15 @@ def normalize(comment, lowercase, remove_stopwords):
     normalized = " ".join(cut)
     return normalized
 
-def get_tfidf_df(train_set, testing_set, min_df, max_df):
+def get_tfidf_df(column_names, train_set, testing_set, min_df, max_df):
     tfidfvectorizer = TfidfVectorizer(analyzer='word',stop_words= 'english', min_df=min_df, max_df=max_df)
 
-    train_set['item_description_new'] = train_set['item_description'].progress_apply(normalize, lowercase=True, remove_stopwords=True)
+    train_set['combined'] = train_set[column_names].agg(' '.join, axis=1)
+    testing_set['combined'] = testing_set[column_names].agg(' '.join, axis=1)
 
-    tfidf_wm = tfidfvectorizer.fit_transform(train_set['item_description_new'].values.astype('U')) # https://stackoverflow.com/a/39308809/3675086
+    train_set['new'] = train_set['combined'].progress_apply(normalize, lowercase=True, remove_stopwords=True)
+
+    tfidf_wm = tfidfvectorizer.fit_transform(train_set['new'].values.astype('U')) # https://stackoverflow.com/a/39308809/3675086
 
     tfidf_tokens = tfidfvectorizer.get_feature_names_out()
 
@@ -48,9 +51,9 @@ def get_tfidf_df(train_set, testing_set, min_df, max_df):
         columns = tfidf_tokens
     )
 
-    testing_set['item_description_new'] = testing_set['item_description'].progress_apply(normalize, lowercase=True, remove_stopwords=True)
+    testing_set['new'] = testing_set['combined'].progress_apply(normalize, lowercase=True, remove_stopwords=True)
 
-    tfidf_wm_2 = tfidfvectorizer.transform(testing_set['item_description_new'].values.astype('U')) # https://stackoverflow.com/a/39308809/3675086
+    tfidf_wm_2 = tfidfvectorizer.transform(testing_set['new'].values.astype('U')) # https://stackoverflow.com/a/39308809/3675086
 
     tfidf_tokens_2 = tfidfvectorizer.get_feature_names_out()
 
