@@ -4,3 +4,4 @@ spacy==3.2.3
 nltk==3.7
 sklearn==0.0
 tqdm==4.63.0
+rake-nltk==1.0.6
