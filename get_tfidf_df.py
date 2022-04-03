@@ -17,8 +17,8 @@ nltk.download('stopwords')
 stops = stopwords.words("english")
 
 def normalize(comment, lowercase, remove_stopwords):
-    if comment == "No description yet":
-        return ''
+    if "No description yet" in comment:
+        comment = comment.replace("No description yet", "")
     if lowercase:
         comment = comment.lower()
     comment = nlp(comment)
