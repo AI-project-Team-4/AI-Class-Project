@@ -17,7 +17,7 @@ nltk.download('stopwords')
 stops = stopwords.words("english")
 
 def apply_normalize(df):
-    df['item_description'].progress_apply(normalize, lowercase=True, remove_stopwords=True)
+    df['combined_desc'].progress_apply(normalize, lowercase=True, remove_stopwords=True)
     return df
 
 def normalize(comment, lowercase, remove_stopwords):

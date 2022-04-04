@@ -11,6 +11,10 @@ from sklearn.ensemble import VotingRegressor
 
 X_train, X_test, y_train, y_test = get_sample(cutoff=10000, test_size=0.33)
 
+X_train['combined_desc'] = X_train[['name', 'item_description']].agg(' '.join, axis=1)
+
+X_test['combined_desc'] = X_test[['name', 'item_description']].agg(' '.join, axis=1)
+
 def category_model(i):
     # Turn category names into numbers for ML model
     category_cols = ['item_condition_id', 'category_name', 'brand_name']
@@ -31,7 +35,7 @@ def tfidf_model(i):
     tfidf_vectorizer = TfidfVectorizer(analyzer='word', stop_words='english')
 
     tfidf_transformer =  ColumnTransformer([
-        ('tfidf', tfidf_vectorizer, 'item_description')
+        ('tfidf', tfidf_vectorizer, 'combined_desc')
     ], sparse_threshold=0)
 
     tfidf_model = Pipeline([
