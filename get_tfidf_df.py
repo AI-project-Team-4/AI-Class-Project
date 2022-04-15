@@ -1,3 +1,7 @@
+# Authors: William Wiemann, Tyler Carr, Benjamin Ranew
+# Project title: Mercari Price Prediction Project
+# File description: This file cleans up the text (title + description) before sending it through tfidf in the pipeline. It converts text to lowercase, lemmatizes, removes stopwords and punctuation, and removes most words that are only numbers. 
+
 from tqdm import tqdm
 import spacy
 from nltk.corpus import stopwords
