@@ -18,10 +18,18 @@ nltk.download('punkt')
 nltk.download('stopwords')
 stops = stopwords.words("english")
 
+# Function: Apply Normalize
+# Description: Run normalize function for each row in entire dataframe on the combined_desc column
+# Params: df (DataFrame)
+# Outputs: df (DataFrame)
 def apply_normalize(df):
     df['combined_desc'].progress_apply(normalize, lowercase=True, remove_stopwords=True)
     return df
 
+# Function: Normalize
+# Description: Normalize the provided string based on provided params. This cleans up the text so model can make better predictions when running on TFIDF matrix. Force string to be lowercase, remove blank descriptions, lemmatize words, remove stopwords, remove punctuation, remove words less than 2 charas, remove words that are only number digits
+# Params: comment (string), lowercase (bool), remove_stopwords (bool)
+# Outputs: normalized (string)
 def normalize(comment, lowercase, remove_stopwords):
     if "No description yet" in comment:
         comment = comment.replace("No description yet", "")

@@ -5,6 +5,10 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
+# Function: Get Sample
+# Description: Get consistent sample from provided train.tsv file using provided params. Then, split into x (all columns except price) and y (price column only) for training and testing dataframes
+# Params: cutoff (int), test_size (decimal percent)
+# Outputs: X_train (dataframe), X_test (dataframe), y_train (dataframe), y_test (dataframe)
 def get_sample(cutoff, test_size):
     # Only the train file is used because it has a column of the true prices, which can be used to compute scores on how accurate our predictions are. There is sufficient data in the train file alone.
     train_df = pd.read_csv("data/train.tsv", sep='\t')[:cutoff]
