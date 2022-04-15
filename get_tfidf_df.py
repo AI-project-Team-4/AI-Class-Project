@@ -1,9 +1,7 @@
-import pandas as pd
 from tqdm import tqdm
 import spacy
 from nltk.corpus import stopwords
 import nltk
-from sklearn.feature_extraction.text import TfidfVectorizer
 import ssl
 import re
 
