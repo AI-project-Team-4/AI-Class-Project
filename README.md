@@ -1,4 +1,6 @@
-# AI-Class-Project
+# Authors: William Wiemann, Tyler Carr, Benjamin Ranew
+# Project title: Mercari Price Prediction Project
+# File description: README.md file containing instructions crucial to successfully running the program
 
 Based on https://www.kaggle.com/c/mercari-price-suggestion-challenge
 
